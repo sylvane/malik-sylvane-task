@@ -122,6 +122,8 @@ class PathFinder {
             return;
         }
 
+        $num_nodes = $this->graph->getNumNodes();
+
         for ( $i = 0; $i < $num_nodes; $i++ ) {
 
             // Add empty list to the ith node.
@@ -145,7 +147,7 @@ class PathFinder {
                 }
 
                 // Get the shortest path.
-                $path = $path_finder->getShortestPath ( $u, $w );
+                $path = $this->getShortestPath ( $u, $w );
 
                 // Add the path and it's distance.
                 $this->paths[$u][$w] = $path;
