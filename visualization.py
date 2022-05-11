@@ -7,7 +7,7 @@ graph = nx.Graph()
 # pos = {(0, 0): (0, 0)}
 pos = {}
 
-s, e = 0, 0
+s, e = 1, 0
 
 start = [0, 13, 26, 39]
 end = [12, 25, 38, 51]
@@ -18,19 +18,19 @@ for i in range(51):
 
     pos[i] = (s, e)
 
-    if i > 0 and i % 13 == 0:
+    if i > 1 and i % 13 == 0:
         s += 3
 
     e = (e + 1) % 13
 
-    if i > 0 and i in end:
+    if i > 1 and i in end:
         continue
 
     graph.add_edge(i, i + 1)
     # pos[(i, i + 1)] = (i + 1, -1 * i)
 
 k = 0
-s = 1
+s = 2
 
 for i in range(52, 58, 2):
     graph.add_node(i)
@@ -49,7 +49,7 @@ for i in range(52, 58, 2):
 
 k = 0
 e = 12
-s = 1
+s = 2
 
 for i in range(58, 64, 2):
     graph.add_node(i)
@@ -66,18 +66,74 @@ for i in range(58, 64, 2):
     s += 3
     k += 1
 
-s = 0
+s = 1
 for u in start:
     pos[u] = (s, 0)
     s += 3
 
-s = 0
+s = 1
 for u in end:
     pos[u] = (s, 12)
     s += 3
 
-pos[51] = (9, 12)
+pos[51] = (10, 12)
 
+bins = []
+
+s = 0
+for i in range(1, 12):
+
+    label = 'A' + str(i)
+    graph.add_node(label)
+    pos[label] = (s, i)
+    bins.append(label)
+
+s = 2
+for i in range(1, 12):
+
+    label1 = 'B' + str(i)
+    label2 = 'C' + str(i)
+
+    graph.add_node(label1)
+    graph.add_node(label2)
+    pos[label1] = (s, i)
+    pos[label2] = (s + 1, i)
+    bins.append(label1)
+    bins.append(label2)
+
+s = 5
+for i in range(1, 12):
+
+    label1 = 'D' + str(i)
+    label2 = 'E' + str(i)
+
+    graph.add_node(label1)
+    graph.add_node(label2)
+    pos[label1] = (s, i)
+    pos[label2] = (s + 1, i)
+    bins.append(label1)
+    bins.append(label2)
+
+s = 8
+for i in range(1, 12):
+
+    label1 = 'F' + str(i)
+    label2 = 'G' + str(i)
+
+    graph.add_node(label1)
+    graph.add_node(label2)
+    pos[label1] = (s, i)
+    pos[label2] = (s + 1, i)
+    bins.append(label1)
+    bins.append(label2)
+
+color_map = []
+
+for i in range(64):
+    color_map.append('#e0ecd4')
+
+for i in range(77):
+    color_map.append('#FFF')
 print(pos)
 
 # graph.add_node(0)
@@ -95,12 +151,14 @@ print(graph.nodes())
 options = {
     "edgecolors": "#333",
     "node_size": 800,
-    "node_color": "#FC5647",
+    # "node_color": "#FC5647",
+    "node_color": color_map,
     "linewidths": 2,
     "width": 2,
     "edge_color": "#333",
-    "font_color": "white",
-    "font_size": "11"
+    "font_color": "#212a35",
+    "font_size": "11",
+    "node_shape": "s"
 }
 
 nx.draw(graph, with_labels=True, pos=pos, **options)#nx.random_layout(graph)) #pos=pos) # nx.spring_layout(graph))

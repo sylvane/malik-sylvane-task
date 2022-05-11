@@ -117,58 +117,8 @@ while(count($visited) <= 12) {
 
     // Add the nearest bin to the final path.
     $final_path[] = $nearest;
-    // echo $current_node . "\n";
 }
 
-// $current_path = $paths[$bin_mapping[$current_node]][$bin_mapping['start']];
-
-// for($i = 1; $i < count($current_path); $i++) {
-//     $exact_path[] = $current_path[$i];
-// }
-
-// $final_path[] = 'start';
-
-
-// $current_node = 'start';
-// $visited = ['start'];
-
-// $next_node = $random_bins[0];
-// $next_node_dist = PHP_INT_MAX;
-
-// for($i = 0; $i <= 12; $i++) {
-
-//     $current_node_id = $bin_mapping[$current_node];
-//     $next_node_id = $bin_mapping[$next_node];
-
-//     echo $current_node_id . "\n";
-//     foreach($random_bins as $bin) {
-
-//         $dist = $distances[$current_node_id][$bin_mapping[$bin]];
-//         // echo $current_node_id . ' -> '. $bin_mapping[$bin];
-
-//         if(!in_array($bin, $visited)) {
-//             $visited[] = $bin;
-
-
-//             // echo $bin . ' : '. $dist . ' : ' . $next_node_dist . "\n";
-//             if($dist < $next_node_dist) {
-//                 $next_node_dist = $dist;
-//                 $next_node = $bin;
-//                 echo $bin . " : updated";
-//             }
-//         }
-//     }
-
-//     if($i == 12) {
-//         $final_path[] = 'start';
-//         // $distances[$bin_mapping[$next_node]][$bin_mapping['start']];
-//     } else {
-//         $final_path[] = $next_node;
-//     }
-
-//     $current_node = $next_node;
-
-// }
 
 echo "Random Bins selected are:\n---\n";
 foreach($random_bins as $bin) {
@@ -208,10 +158,3 @@ foreach($exact_path as $node) {
     $i++;
 
 }
-
-// echo "The bin"
-// print_r($random_bins);
-// print_r($final_path);
-// print_r($exact_path);
-// print_r ( $paths );
-// print_r ( $distances );
