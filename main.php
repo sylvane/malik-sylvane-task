@@ -142,7 +142,7 @@ foreach($final_path as $bin) {
 
 }
 
-echo "\n\nThe exact path in the graph is as follows:\n---\n";
+echo "\n\nThe exact path in the graph is as follows with a total distance of " . count($exact_path) . " steps:\n---\n";
 
 $i = 0;
 
@@ -161,25 +161,25 @@ foreach($exact_path as $node) {
 
 // Random Bins selected are:
 // ---
-// A3
-// B7
-// C2
-// D3
-// D7
-// C8
-// D8
-// C9
+// B1
+// B4
+// A6
+// A7
+// A10
+// C1
+// C5
+// C11
 // F2
-// F5
-// F7
-// G7
+// F9
+// E11
+// G5
 
 
 // The optimal bin visiting order is as follows:
 // ---
-// start -> C2 -> D3 -> D7 -> C8 -> D8 -> C9 -> B7 -> A3 -> F2 -> F5 -> F7 -> G7 -> start
+// start -> C1 -> C5 -> C11 -> E11 -> F9 -> F2 -> B1 -> B4 -> A6 -> A7 -> A10 -> G5 -> start
 
 
-// The exact path in the graph is as follows:
+// The exact path in the graph is as follows with a total distance of 73 steps:
 // ---
-// 14 -> 15 -> 16 -> 17 -> 18 -> 19 -> 20 -> 21 -> 22 -> 23 -> 24 -> 25 -> 59 -> 58 -> 12 -> 11 -> 10 -> 9 -> 8 -> 7 -> 6 -> 5 -> 4 -> 3 -> 2 -> 1 -> 0 -> 52 -> 53 -> 13 -> 54 -> 55 -> 26 -> 27 -> 28 -> 29 -> 30 -> 31 -> 32 -> 33 -> 34 -> 35 -> 36 -> 37 -> 38 -> 62 -> 63 -> 51 -> 50 -> 49 -> 48 -> 47 -> 46 -> 45 -> 44 -> 43 -> 42 -> 41 -> 40 -> 39 -> 57 -> 56 -> 26 -> 55 -> 54 -> 13 -> 14
+// 14 -> 15 -> 16 -> 17 -> 18 -> 19 -> 20 -> 21 -> 22 -> 23 -> 24 -> 25 -> 60 -> 61 -> 38 -> 37 -> 36 -> 35 -> 34 -> 33 -> 32 -> 31 -> 30 -> 29 -> 28 -> 27 -> 26 -> 55 -> 54 -> 13 -> 53 -> 52 -> 0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12 -> 58 -> 59 -> 25 -> 60 -> 61 -> 38 -> 62 -> 63 -> 51 -> 50 -> 49 -> 48 -> 47 -> 46 -> 45 -> 44 -> 43 -> 42 -> 41 -> 40 -> 39 -> 57 -> 56 -> 26 -> 55 -> 54 -> 13 -> 14
