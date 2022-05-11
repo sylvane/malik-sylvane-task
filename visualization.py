@@ -1,7 +1,6 @@
 
 import matplotlib.pyplot as plt
 import networkx as nx
-from networkx.drawing.nx_agraph import to_agraph
 
 graph = nx.Graph()
 # pos = {(0, 0): (0, 0)}
