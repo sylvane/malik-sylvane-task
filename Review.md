@@ -1,0 +1,29 @@
+#
+- Preparation
+    - The list of all bin identifiers is iterated:
+        - Assign a numbered vertex {access_location_id} representing the location this bin can be accessed from.
+    - Manually define a list of edges between {access_location_id} pairs.
+- Dijkstra: Populate Paths & Distances
+    - Given a graph containing all {access_location_id}s:
+    - Every {access_location_id} will have a shortest path calculated to every other {access_location_id}.
+        - `PathFinder::getShortestPath( int $source, int $sink )`
+    - Resulting Data:
+        - `$paths[$source_access_location_id][$destination_access_location_id] = [{...access_location_id}]`
+        - Not necessary, used for quicker lookups later:
+            - `$distances[$source_access_location_id][$destination_access_location_id] = count($paths[$source_access_location_id][$destination_access_location_id])`
+- Path Finding
+    - Start at an arbitrary point {start}.
+    - Until all bins have been iterated {iteration A}:
+        - Find the nearest bin:
+            - Given a source bin identifier:
+            - Look up the associated {access_location_id}.
+            - The list of all unvisited (not yet returned as a nearest bin) bin identifiers is iterated:
+                - Look up the associated {access_location_id}.
+                - Look up the path between the source {access_location_id} and destination {access_location_id} in `$paths`.
+            - Return the unvisited bin with the shortest path.
+        - Add the path to this nearest bin to the full path.
+    - Add the path to the {start} location to the full path.
+- Discussion
+    - Warehouse Layout & Edges manually specified
+    - Really total shortest path?
+        - Point-to-point distances are, but the main bin loop goes one by one to nearest.
