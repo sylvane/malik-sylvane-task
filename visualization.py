@@ -1,6 +1,10 @@
-
 import matplotlib.pyplot as plt
 import networkx as nx
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('aisle_bin_count', type=int)
+args = parser.parse_args()
 
 graph = nx.Graph()
 # pos = {(0, 0): (0, 0)}
@@ -8,19 +12,21 @@ pos = {}
 
 s, e = 1, 0
 
-start = [0, 13, 26, 39]
-end = [12, 25, 38, 51]
+aisle_bin_count_plus_1 = args.aisle_bin_count + 1
+aisle_count = 4
+start = [0, (aisle_bin_count_plus_1 * 1) + 1, (aisle_bin_count_plus_1 * 2) + 2, (aisle_bin_count_plus_1 * 3) + 3]
+end = [(aisle_bin_count_plus_1 * 1), (aisle_bin_count_plus_1 * 2) + 1, (aisle_bin_count_plus_1 * 3) + 2, (aisle_bin_count_plus_1 * 4) + 3]
 
-for i in range(51):
+for i in range(end[-1]):
     graph.add_node(i)
     graph.add_node(i + 1)
 
     pos[i] = (s, e)
 
-    if i > 1 and i % 13 == 0:
+    if i > 1 and i % (aisle_bin_count_plus_1 + 1) == 0:
         s += 3
 
-    e = (e + 1) % 13
+    e = (e + 1) % (aisle_bin_count_plus_1 + 1)
 
     if i > 1 and i in end:
         continue
@@ -31,7 +37,7 @@ for i in range(51):
 k = 0
 s = 2
 
-for i in range(52, 58, 2):
+for i in range(end[-1] + 1, (end[-1] + 1) + (aisle_count - 1) * 2, 2):
     graph.add_node(i)
     graph.add_node(i + 1)
     graph.add_edge(start[k], i)
@@ -47,10 +53,10 @@ for i in range(52, 58, 2):
     k += 1
 
 k = 0
-e = 12
+e = aisle_bin_count_plus_1
 s = 2
 
-for i in range(58, 64, 2):
+for i in range((end[-1] + 1) + (aisle_count - 1) * 2, (end[-1] + 1) + (aisle_count - 1) * 4, 2):
     graph.add_node(i)
     graph.add_node(i + 1)
     graph.add_edge(end[k], i)
@@ -72,15 +78,15 @@ for u in start:
 
 s = 1
 for u in end:
-    pos[u] = (s, 12)
+    pos[u] = (s, aisle_bin_count_plus_1)
     s += 3
 
-pos[51] = (10, 12)
+pos[end[-1]] = (10, aisle_bin_count_plus_1)
 
 bins = []
 
 s = 0
-for i in range(1, 12):
+for i in range(1, aisle_bin_count_plus_1):
 
     label = 'A' + str(i)
     graph.add_node(label)
@@ -88,7 +94,7 @@ for i in range(1, 12):
     bins.append(label)
 
 s = 2
-for i in range(1, 12):
+for i in range(1, aisle_bin_count_plus_1):
 
     label1 = 'B' + str(i)
     label2 = 'C' + str(i)
@@ -101,7 +107,7 @@ for i in range(1, 12):
     bins.append(label2)
 
 s = 5
-for i in range(1, 12):
+for i in range(1, aisle_bin_count_plus_1):
 
     label1 = 'D' + str(i)
     label2 = 'E' + str(i)
@@ -114,7 +120,7 @@ for i in range(1, 12):
     bins.append(label2)
 
 s = 8
-for i in range(1, 12):
+for i in range(1, aisle_bin_count_plus_1):
 
     label1 = 'F' + str(i)
     label2 = 'G' + str(i)
@@ -128,10 +134,10 @@ for i in range(1, 12):
 
 color_map = []
 
-for i in range(64):
+for i in range((end[-1] + 1) + (aisle_count - 1) * 4):
     color_map.append('#e0ecd4')
 
-for i in range(77):
+for i in range(len(pos) - len(color_map)):
     color_map.append('#FFF')
 print(pos)
 
@@ -160,7 +166,8 @@ options = {
     "node_shape": "s"
 }
 
-nx.draw(graph, with_labels=True, pos=pos, **options)#nx.random_layout(graph)) #pos=pos) # nx.spring_layout(graph))
+nx.draw(graph, with_labels=True, pos=pos,
+**options)#nx.random_layout(graph)) #pos=pos) # nx.spring_layout(graph))
 plt.show()
 
 adj_matrix = nx.adjacency_matrix(graph).todense().tolist()

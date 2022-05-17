@@ -1,6 +1,6 @@
 <?php
 
-require_once('params.php');
+require_once('params_new.php');
 require_once('Graph.php');
 require_once('PathFinder.php');
 require_once('Sylvane.php');
@@ -67,8 +67,9 @@ $bins = array_diff( $bins, ['start'] );
 // Initialize the Sylvance class object.
 $sylvane = new Sylvane( $bins );
 
-// Get 12 random bins.
-$random_bins = $sylvane->getRandomBins ( 12 );
+if(!isset($requested_bins))
+  // Get 12 random bins.
+  $requested_bins = $sylvane->getRandomBins ( 12 );
 
 // Instantiate the PathFinder class object.
 $path_finder = new PathFinder ( $graph );
@@ -96,7 +97,7 @@ while(count($visited) <= 12) {
 
     if(count($visited) < 12) {
         // Get the nearest bin.
-        $nearest = getNearestBin($current_node, $random_bins, $visited, $distances, $bin_mapping);
+        $nearest = getNearestBin($current_node, $requested_bins, $visited, $distances, $bin_mapping);
     } else {
         $nearest = 'start';
     }
@@ -120,8 +121,8 @@ while(count($visited) <= 12) {
 }
 
 
-echo "Random Bins selected are:\n---\n";
-foreach($random_bins as $bin) {
+echo "Requested Bins are:\n---\n";
+foreach($requested_bins as $bin) {
     echo $bin . "\n";
 }
 
