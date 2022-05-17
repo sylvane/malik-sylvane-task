@@ -1,8 +1,15 @@
 <?php
 require_once('params.php');
 
+
 $argv_bin_count = ($argv[1] ?? null) ?: null;
 if(is_null($argv_bin_count)) return;
+
+$argv_start_index = $argv[2] ?? null;
+if(!is_numeric($argv_start_index) || $argv_start_index < 0)
+  throw new InvalidArgumentException('Invalid start index: '.$argv_start_index);
+
+$start_index = $argv_start_index;
 
 if(!is_numeric($argv_bin_count) || $argv_bin_count <= 0)
   throw new InvalidArgumentException('Invalid bin count: '.$argv_bin_count);
@@ -10,7 +17,7 @@ if(!is_numeric($argv_bin_count) || $argv_bin_count <= 0)
 $aisle_bin_count = intval($argv_bin_count);
 echo "\$aisle_bin_count: {$aisle_bin_count}\n";
 
-$argv_requested_bins = ($argv[2] ?? null) ?: null;
+$argv_requested_bins = ($argv[3] ?? null) ?: null;
 if(!is_null($argv_requested_bins))
 {
   $requested_bins = explode(',', $argv_requested_bins);
@@ -146,6 +153,8 @@ foreach(range(0, $aisle_count - 1) as $aisle_index) {
       add_bin_mapping($new_bin_mapping, $alphabet[($aisle_index * 2) + 1] . $bin_index, $bin_index + (($aisle_bin_count + 2) * $aisle_index));
   }
 }
+
+$new_bin_mapping['start'] = $start_index;
 
 // echo json_encode($new_bin_mapping)."\n\n".json_encode($bin_mapping)."\n"; exit;
 $bin_mapping = $new_bin_mapping;

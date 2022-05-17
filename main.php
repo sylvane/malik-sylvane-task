@@ -91,7 +91,7 @@ $current_node = 'start';
 $final_path = ['start'];
 
 // Store the path in the graph with node ids.
-$exact_path = [14];
+$exact_path = [$start_index ?? 14];
 
 while(count($visited) <= 12) {
 

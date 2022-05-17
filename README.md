@@ -19,7 +19,7 @@ In the above graph, the green nodes are the aisles and are paths that can be tra
 
 To test the working of this code. Clone this repository and then run the following command:
 ```
-php main.php {aisle_bin_count} {A1,B2,C3}
+php main.php {aisle_bin_count} {start_index} {A1,B2,C3}
 ```
 
 Make sure you have PHP CLI installed before running the above command.
